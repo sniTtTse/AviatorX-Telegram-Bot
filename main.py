@@ -304,8 +304,6 @@ def process_withdraw(message):
     else:
         bot.send_message(user_id, 'Недостатньо коштів на балансі для виведення. ✈️')
 
-# Перезапуск деплою
-
 # Запуск першого бота
 def start_polling_bot():
     bot.polling(none_stop=True)
