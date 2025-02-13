@@ -304,6 +304,8 @@ def process_withdraw(message):
     else:
         bot.send_message(user_id, 'Недостатньо коштів на балансі для виведення. ✈️')
 
+# Перезапуск деплою
+
 # Запуск першого бота
 def start_polling_bot():
     bot.polling(none_stop=True)
@@ -317,3 +319,4 @@ if __name__ == "__main__":
     # Запуск обох ботів у паралельних потоках
     threading.Thread(target=start_polling_bot).start()
     threading.Thread(target=start_polling_other_bot).start()
+
