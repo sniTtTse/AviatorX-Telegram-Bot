@@ -9,7 +9,7 @@ from telebot import types
 API_TOKEN = '7521035909:AAG6m07C1qV1lTtsV6_iy0jFu6tSWdONTf8'
 bot = telebot.TeleBot(API_TOKEN)
 
-# Ініціалізація другого бота
+# Ініціація другого бота
 OTHER_BOT_TOKEN = '7777584488:AAFRnBk5j46DZVo6TJz2kBL_9XiU19Nfh2M'
 other_bot = telebot.TeleBot(OTHER_BOT_TOKEN)
 
@@ -180,7 +180,8 @@ def set_bet(message):
             markup.add(btn_cashout, btn_back)
             bot.send_message(user_id, 'Гра почалася! Ви можете забрати виграш в будь-який момент. ✈️', reply_markup=markup)
 
-            threading.Thread(target=start_game, args=(user_id,)).start()
+            game_thread = threading.Thread(target=start_game, args=(user_id,))
+            game_thread.start()
     else:
         bot.send_message(user_id, 'Недостатньо коштів. Будь ласка, поповніть баланс.')
 
@@ -317,4 +318,3 @@ if __name__ == "__main__":
     # Запуск обох ботів у паралельних потоках
     threading.Thread(target=start_polling_bot).start()
     threading.Thread(target=start_polling_other_bot).start()
-
