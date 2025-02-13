@@ -9,7 +9,7 @@ from telebot import types
 API_TOKEN = '7521035909:AAG6m07C1qV1lTtsV6_iy0jFu6tSWdONTf8'
 bot = telebot.TeleBot(API_TOKEN)
 
-# Ініціація другого бота
+# Ініціалізація другого бота
 OTHER_BOT_TOKEN = '7777584488:AAFRnBk5j46DZVo6TJz2kBL_9XiU19Nfh2M'
 other_bot = telebot.TeleBot(OTHER_BOT_TOKEN)
 
@@ -172,16 +172,15 @@ def set_bet(message):
         users[user_id]['bets'].append({'bet': bet, 'auto_cashout': None})
         bot.send_message(user_id, f'Ви зробили ставку на {bet} грн. Початок гри... ✈️')
 
-        if len(users[user_id]['bets']) == 1:
-            # Додавання кнопки для забирання виграшу
-            markup = types.ReplyKeyboardMarkup(row_width=1)
-            btn_cashout = types.KeyboardButton('Забрати виграш')
-            btn_back = types.KeyboardButton('Назад')
-            markup.add(btn_cashout, btn_back)
-            bot.send_message(user_id, 'Гра почалася! Ви можете забрати виграш в будь-який момент. ✈️', reply_markup=markup)
+        # Додавання кнопки для забирання виграшу
+        markup = types.ReplyKeyboardMarkup(row_width=1)
+        btn_cashout = types.KeyboardButton('Забрати виграш')
+        btn_back = types.KeyboardButton('Назад')
+        markup.add(btn_cashout, btn_back)
+        bot.send_message(user_id, 'Гра почалася! Ви можете забрати виграш в будь-який момент. ✈️', reply_markup=markup)
 
-            game_thread = threading.Thread(target=start_game, args=(user_id,))
-            game_thread.start()
+        game_thread = threading.Thread(target=start_game, args=(user_id,))
+        game_thread.start()
     else:
         bot.send_message(user_id, 'Недостатньо коштів. Будь ласка, поповніть баланс.')
 
